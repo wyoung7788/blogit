@@ -1,15 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import './App.css'
+import Login from './components/Login'
+import React from 'react'
 
 function App() {
+
   return (
-    <div className="App">
-      <div className="flex items-center mt-10">
-        Welcome to scribbl
+    <>
+      <div>
+        Scribbl
+        <div>
+          <Login/>
+        </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }
 
-export default App;
+export default App
