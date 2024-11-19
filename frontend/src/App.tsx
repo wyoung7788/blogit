@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import Login from './components/Login'
-import React from 'react'
 
-function App() {
+import './App.css';
+import React, { useState } from 'react';
+
+function Home() {
+
+//if user not logged in show unauth page, else show logged in page
 
   return (
-    <>
       <div>
-        Scribbl
+        Welcome to Scribbl!
         <div>
-          <Login/>
+        <button onClick>
         </div>
       </div>
-    </>
   )
 }
 
