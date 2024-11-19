@@ -1,17 +1,14 @@
-const express = require('express');
-const authenticateUser = require('../controllers/login_controller');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import authRoutes from './routes.js';
 
-const router = express.Router();
 
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+const app = express();
+const port = 5175;
 
-    const result = await authenticateUser(username, password);
-    if (result.success){
-        res.status(200).json(result);
-    } else {
-        res.status(401).json(result);
-    }
-});
+app.use(cors());
+app.use(bodyParser.json())
+app.use('/api/auth', authRoutes);
 
-module.exports = router;
+app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

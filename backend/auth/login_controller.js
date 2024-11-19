@@ -1,16 +1,26 @@
-const User = require('./login_model');
+import bcrypt from 'bcryptjs';
+import { User } from './login_model.js';
 
-export async function authenticateUser(username, password){
+export const authenticateUser = async(req, res) => {
     try {
+        const { username, password} = req.body;
+        console.log(username); // works - fetches username from frontend
         const user = await User.findOne({username});
+        if (!user){
+            console.log('User not found');
+            return res.status(401).json({ success: false, message: 'Invalid username'})
+        }
+        const passwordMatch = await bcrypt.compare(password, user.password)
 
-        if (user && user.password === password){
-            return { success: true, message: 'Login successful'};
+        if (passwordMatch){
+            console.log('success')
+            return res.status(200).json({ success: true, message: 'Login successful'})
         } else {
-            return { success: false, message: 'Invalid username or password'};
+            console.log('Password mismatch');
+            return res.status(401).json({ success: false, message: 'Invalid username or password'})
         }
     } catch (error) {
-        return { success: false, message: 'Error occured during authentication'};
+        return res.status(500).json({ success: false, message: 'Error occured during authentication'});
     }
 }
 
