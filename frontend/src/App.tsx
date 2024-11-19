@@ -1,19 +1,19 @@
 
 import './App.css';
-import React, { useState } from 'react';
+import LoginPage from './components/LoginPage';
 
-function Home() {
+export default function Home() {
 
 //if user not logged in show unauth page, else show logged in page
 
   return (
       <div>
-        Welcome to Scribbl!
+        Welcome to BlogIt!
         <div>
-        <button onClick>
+          <LoginPage/>
         </div>
       </div>
   )
 }
 
-export default App
+

@@ -1,4 +1,4 @@
-const User = require('../models/login_model');
+const User = require('./login_model');
 
 export async function authenticateUser(username, password){
     try {
