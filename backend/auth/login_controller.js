@@ -1,17 +1,22 @@
 import bcrypt from 'bcryptjs';
-import { User } from './login_model.js';
+import { client } from '../connection.cjs';
 
-export const authenticateUser = async(req, res) => {
+export const authenticateUser = async (req, res) => {
     try {
         const { username, password} = req.body;
-        console.log(username); // works - fetches username from frontend
-        const user = await User.findOne({username});
+        const db = client.db('blogit_data');
+        const usersCollection = db.collection('users');
+        //console.log(username); // works - fetches username from frontend
+        const user = await usersCollection.findOne({username}); // not working from here
+
         if (!user){
             console.log('User not found');
             return res.status(401).json({ success: false, message: 'Invalid username'})
         }
-        const passwordMatch = await bcrypt.compare(password, user.password)
 
+        const passwordMatch = await bcrypt.compare(password, user.password)
+        console.log(passwordMatch)
+        //console.log(password);
         if (passwordMatch){
             console.log('success')
             return res.status(200).json({ success: true, message: 'Login successful'})

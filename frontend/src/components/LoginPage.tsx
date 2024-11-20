@@ -9,7 +9,6 @@ export default function LoginPage() {
 
         try { 
             const userInfo = { username, password };
-            console.log(userInfo)
             const response = await fetch('http://localhost:5175/api/auth/login', {
                 method: 'POST',
                 headers: {
