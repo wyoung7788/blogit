@@ -1,8 +1,10 @@
 import React, { useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
+   const navigate = useNavigate();
 
 
     async function logIn(username: string, password: string){
@@ -24,6 +26,9 @@ export default function LoginPage() {
             }
             const data = await response.json();
             console.log('Login response:', data);
+            localStorage.setItem('username', username);
+
+            
    
             return data;
         } catch (error) {
@@ -39,6 +44,8 @@ export default function LoginPage() {
         const result = await logIn(username, password);
         if (result.success){
             console.log('Login successful', result);
+            navigate('/authorized')
+
         } else{
             console.error('Error logging in:', result.message);
         }
@@ -46,9 +53,9 @@ export default function LoginPage() {
 
 
     return(
-        <div className="loginForm">
+        <div className="loginForm" >
             <h2>Log in Here</h2>
-            <form className="flex" onSubmit={handleSubmit}>
+            <form className="flex bg-blue-400" onSubmit={handleSubmit}>
                 <div>
                     <input 
                     className="username"
