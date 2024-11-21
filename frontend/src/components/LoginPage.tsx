@@ -19,7 +19,6 @@ export default function LoginPage() {
                 body: JSON.stringify(userInfo) //package into a JSON object
                 
             });
-            console.log(response)
             if (!response.ok){
                 const data = await response.json()
                 throw new Error(data.message || 'Failed to login');

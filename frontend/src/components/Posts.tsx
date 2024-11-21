@@ -5,24 +5,24 @@ export default function Posts(){
     const [posts, setPosts] = useState([]);
 
     useEffect(()=> {
-        async function fetchPosts(){
+        const  fetchPosts = async () => {
         try { 
-            const response = await fetch('http://localhost:5175/api/auth/posts', {
+            const response = await fetch('http://localhost:5176/api/posts/load', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
+
             if (!response.ok){
-                const data = await response.json()
-                throw new Error(data.message || 'Failed to fetch posts');
+                throw new Error('HTTP error! Failed to fetch posts');
             }
             const data = await response.json();
             console.log('Login response:', data);
-            setPosts(data.data);
+            setPosts(data.data || []);
         } catch (error) {
-            console.error('Error during authentication:', error);
-            return { success: false, message: 'Error occured during authentication' };
+            console.error('Error during posts retrieval:', error);
+            return { success: false, message: 'Error occured during post fetching' };
         }
     }
     fetchPosts();
