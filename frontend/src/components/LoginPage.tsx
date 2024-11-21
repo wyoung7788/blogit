@@ -55,7 +55,7 @@ export default function LoginPage() {
     return(
         <div className="loginForm" >
             <h2>Log in Here</h2>
-            <form className="flex bg-blue-400" onSubmit={handleSubmit}>
+            <form className="" onSubmit={handleSubmit}>
                 <div>
                     <input 
                     className="username"

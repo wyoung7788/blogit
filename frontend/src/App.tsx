@@ -1,8 +1,8 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import UnAuthorizedPage from './unauthorized/App';
 import AuthorizedPage from './authorized/App';
+import RegisterPage from './components/RegisterPage';
 
 export default function Home() {
 
@@ -13,6 +13,7 @@ export default function Home() {
         <Routes>
           <Route path="/" element={<UnAuthorizedPage/>}/>
           <Route path="/authorized" element={<AuthorizedPage />}/>
+          <Route path="/register" element={<RegisterPage />}/>
         </Routes>
       </Router>
   )

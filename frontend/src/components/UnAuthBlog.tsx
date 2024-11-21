@@ -1,9 +1,10 @@
+import Posts from "./Posts";
 
 
 export default function UnAuthBlog(){
     return(
         <div>
-            Blah blah blah
+            <Posts/>
         </div>
     )
 }
