@@ -1,7 +1,8 @@
+
 import { useState, useEffect } from "react";
 
 
-export default function Posts(){
+export default function PostsLoggedIn(){
     const [posts, setPosts] = useState([]);
 
     useEffect(()=> {

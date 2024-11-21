@@ -53,7 +53,7 @@ export default function LoginPage() {
 
     return(
         <div className="loginForm" >
-            <h2>Log in Here</h2>
+            <h2 className="font-bold justify-center m-5">Log in Here</h2>
             <form className="" onSubmit={handleSubmit}>
                 <div>
                     <input 
@@ -73,7 +73,7 @@ export default function LoginPage() {
                     />
                 </div>
                 <div>
-                    <button className="btn-submit" type="submit">Log in</button>
+                    <button className="btn-submit m-5 bg-blue-400" type="submit">Log in</button>
                 </div>
             </form>
         </div>
