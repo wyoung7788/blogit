@@ -11,7 +11,9 @@ export default function AuthorizedPage(){
     }
 
     return(
+        
         <div className="bg-blue-400 min-h-screen text-white">
+            <header>Your Posts</header>
             <h3> Hello</h3>
             <CreatePost/>
             <PostsLoggedIn/>

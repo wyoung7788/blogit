@@ -1,12 +1,11 @@
 import { client } from "../connection.cjs";
 const db = client.db('blogit_data');
 const postsCollection = db.collection('posts');
-import { Post, Counter } from "./post_model";
+import { Post} from "./post_model.js";
 
 export const loadPosts = async (req, res) => {
     try{
         const posts = await postsCollection.find({}).toArray();
-        console.log(posts)
 
     return res.status(200).json({ success: true, data: posts});
     } catch (error) {
@@ -16,26 +15,25 @@ export const loadPosts = async (req, res) => {
 
 export const createPost = async (req, res) =>{
     try {
-        const { title, content, author_username, time } = req.body;
 
-        if (!title || !content || !author_username || !time){
+        
+        const { title, contents, user_id, date_created } = req.body;
+        console.log(req.body)
+        if (!title || !contents || !user_id || !date_created){
             return res.status(400).json({ success: false, message: 'Missing required fields'})
         }
+        
 
-        const counter = await Counter.findOneAndUpdate(
-            { _id: 'post_id'},
-            { $inc: { sequence_value: 1}},
-            { new: true, upsert: true}
-        );
-
-        const newPostId = counter.sequence_value;
-
+        const postCount = await postsCollection.countDocuments()
+        const newPostId = postCount + 1;
+        console.log(postCount, newPostId)
+        //this will later have to account for when posts are deleted, update all the postIds??
         const newPost = new Post({
             post_id: newPostId,
             title,
-            content, 
-            author_username,
-            published_at: time,
+            contents, 
+            user_id,
+            date_created,
         });
 
         const result = await postsCollection.insertOne(newPost);
@@ -43,7 +41,7 @@ export const createPost = async (req, res) =>{
         if (result.acknowledged) {
             return res.status(201).json({
                 success: true,
-                message: 'Post created succesfully',
+                message: 'Post created successfully',
                 data: result,
             });
         } else{
@@ -52,7 +50,10 @@ export const createPost = async (req, res) =>{
                 message: 'Failed to create post',
             });
         }
+            
     } catch (error){
-        return res.status(500).json({ success: false, message: 'Error occured during post creation'});
+        return res.status(500).json({ success: false, message: 'Error occured during post process'});
     }
+        
+        
 }

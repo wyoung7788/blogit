@@ -4,6 +4,7 @@ const router = Router();
 
 router.get('/load', loadPosts);
 router.post('/create', createPost);
-//router.post('/edit', editPost); // edit existing posts
+//router.put('/edit/:postId', editPost); // edit existing posts
+//router.delete(/delete/:postId)
 
 export default router;

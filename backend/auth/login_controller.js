@@ -8,10 +8,7 @@ const usersCollection = db.collection('users');
 export const authenticateUser = async (req, res) => {
     try {
         const { username, password} = req.body;
-        
-        
-        //console.log(username); // works - fetches username from frontend
-        const user = await usersCollection.findOne({username}); // not working from here
+        const user = await usersCollection.findOne({username}); 
 
         if (!user){
             console.log('User not found');
@@ -19,7 +16,6 @@ export const authenticateUser = async (req, res) => {
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password)
-        //console.log(password);
         if (passwordMatch){
             return res.status(200).json({ success: true, message: 'Login successful'})
         } else {

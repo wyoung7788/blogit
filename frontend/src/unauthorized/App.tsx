@@ -12,12 +12,12 @@ export default function UnAuthorizedPage(){
     return(
         <div>
         <div className="min-h-screen flex flex-col text-white items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-300">
-            <h1 className="mt-20 text-4xl font-bold mb-8">BlogIt!</h1>
+            <h1 className="mt-5 text-4xl font-bold mb-8">BlogIt!</h1>
             <div className="grid grid-cols-2 gap-8 w-3/4">
                 <div className="flex justify-center items-center">
                 <UnAuthBlog/>
                 </div>
-                <div className="flex-col m-5">
+                <div className="flex-col flex">
                 <LoginPage/>
                 Not a user?
 

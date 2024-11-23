@@ -27,8 +27,6 @@ export default function LoginPage() {
             console.log('Login response:', data);
             localStorage.setItem('username', username);
 
-            
-   
             return data;
         } catch (error) {
             console.error('Error during authentication:', error);
@@ -42,7 +40,6 @@ export default function LoginPage() {
 
         const result = await logIn(username, password);
         if (result.success){
-            console.log('Login successful', result);
             navigate('/authorized')
 
         } else{
@@ -52,9 +49,9 @@ export default function LoginPage() {
 
 
     return(
-        <div className="loginForm" >
+        <div className="loginForm bg-indigo-400 rounded-xl p-5 m-5" >
             <h2 className="font-bold justify-center m-5">Log in Here</h2>
-            <form className="" onSubmit={handleSubmit}>
+            <form className="text-gray-700" onSubmit={handleSubmit}>
                 <div>
                     <input 
                     className="username"
@@ -73,7 +70,7 @@ export default function LoginPage() {
                     />
                 </div>
                 <div>
-                    <button className="btn-submit m-5 bg-blue-400" type="submit">Log in</button>
+                    <button className="btn-submit m-5 bg-indigo-300" type="submit">Log in</button>
                 </div>
             </form>
         </div>
