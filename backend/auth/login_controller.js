@@ -43,9 +43,13 @@ export const registerUser  = async (req, res) =>{
                     password: hashedPassword,
                 })
                 await usersCollection.insertOne(newUser);
-                return res.status(201).json(newUser)
+                return res.status(201).json({
+                    success: true,
+                    data: newUser});
             } catch (err) {
-                return res.status(400).json({ message: err.message})
+                return res.status(400).json({ 
+                    success: false,
+                    message: err.message})
             }
             
     }}

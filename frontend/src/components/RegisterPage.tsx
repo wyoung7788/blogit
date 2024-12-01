@@ -30,7 +30,7 @@ export default function RegisterPage(){
             }
             const data = await response.json();
             console.log('Register response:', data);
-   
+            return { success: true};
             return data;
         } catch (error) {
             console.error('Error during creation:', error);
@@ -48,7 +48,7 @@ export default function RegisterPage(){
 
         } else{
             console.error('Error creating user:', result.message);
-            alert(result.message);
+            alert(result.message)
         }
    }
 
