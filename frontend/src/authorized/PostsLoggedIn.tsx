@@ -32,7 +32,7 @@ export default function PostsLoggedIn(){
         
     return(
 
-        <div className="bg-blue-500 rounded-xl m-5 p-5">
+        <div className="bg-blue-500 rounded-xl m-5 p-5 w-30">
             <h1>Recent Posts</h1>
             {posts.length === 0? (
                 <p>No posts available.</p>

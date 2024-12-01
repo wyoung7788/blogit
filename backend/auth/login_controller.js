@@ -28,23 +28,22 @@ export const authenticateUser = async (req, res) => {
 }
 
 export const registerUser  = async (req, res) =>{
-    //check if username is avaiable
-
-        const { username, password } = req.body;
+    //check if username is available
+        const { username, password: plainTextPassword } = req.body;
         const user = await usersCollection.findOne({username}); 
 
         if (user){
             return res.status(400).send('User already exists. Please sign in')
         } else{
             try {
-                const salt = await bcrypt.genSalt(password);
-                const password = await bcrypt.hash(req.body.password, salt);
-                const user = new RegisterUser({
-                    username: req.body.username,
-                    password: req.body.password
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(plainTextPassword, salt);
+                const newUser = new RegisterUser({
+                    username: username,
+                    password: hashedPassword,
                 })
-                await user.save()
-                return res.status(201).json(user)
+                await usersCollection.insertOne(newUser);
+                return res.status(201).json(newUser)
             } catch (err) {
                 return res.status(400).json({ message: err.message})
             }

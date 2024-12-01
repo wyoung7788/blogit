@@ -1,23 +1,17 @@
-import { useNavigate } from "react-router-dom";
+
 import PostsLoggedIn from "./PostsLoggedIn";
 import CreatePost from "../components/CreatePost";
+import MainHeader from "./MainHeader";
 
 export default function AuthorizedPage(){
-    const navigate = useNavigate();
-
-    const logOut = () => {
-        localStorage.removeItem('username');
-        navigate('/');
-    }
+    
 
     return(
         
         <div className="bg-blue-400 min-h-screen text-white">
-            <header>Your Posts</header>
-            <h3> Hello</h3>
+            <MainHeader/>
             <CreatePost/>
             <PostsLoggedIn/>
-            <button onClick={logOut} className="bg-blue-300">Log out</button>
         </div>
     )
 }

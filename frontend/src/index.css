@@ -6,6 +6,28 @@ h1{
   font-size: 2em;
 }
 
+.header{
+  background-color: cornflowerblue;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+nav ul{
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li{
+  list-style: none;
+  margin: 0 15px;
+}
+
+
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -11,7 +11,7 @@ export default function RegisterPage(){
         navigate('/');
     }
 
-    async function logIn(username: string, password: string){
+    async function Register(username: string, password: string){
 
         try { 
             const userInfo = { username, password };
@@ -29,26 +29,26 @@ export default function RegisterPage(){
                 throw new Error(data.message || 'Failed to create user');
             }
             const data = await response.json();
-            console.log('Login response:', data);
-            localStorage.setItem('username', username);
+            console.log('Register response:', data);
    
             return data;
         } catch (error) {
-            console.error('Error during authentication:', error);
-            return { success: false, message: 'Error occured during authentication' };
+            console.error('Error during creation:', error);
+            return { success: false, message: 'Error occured during creation' };
         }
 
     }
     async function handleSubmit(event: React.FormEvent){
         event.preventDefault();
 
-        const result = await logIn(username, password);
+        const result = await Register(username, password);
         if (result.success){
-            console.log('Login successful', result);
-            navigate('/authorized')
+            console.log('Register successful', result);
+            navigate('/login')
 
         } else{
-            console.error('Error logging in:', result.message);
+            console.error('Error creating user:', result.message);
+            alert(result.message);
         }
    }
 
@@ -57,13 +57,13 @@ export default function RegisterPage(){
 
     return(
 
-        <div>
-        <div className="registerForm" >
-            <h2>Register Here</h2>
-            <form className="flex bg-blue-400" onSubmit={handleSubmit}>
+        <div className="bg-blue-400 h-screen">
+        <div className="registerForm p-5 text-white" >
+            <h2 className="font-extrabold text-3xl m-5 p-5">Register Here</h2>
+            <form className="bg-blue-300 rounded-xl" onSubmit={handleSubmit}>
                 <div>
                     <input 
-                    className="username"
+                    className="username m-5 p-1 text-black"
                     placeholder="Username"
                     value={username}
                     onChange={(e)=> setUsername(e.target.value)}
@@ -71,7 +71,7 @@ export default function RegisterPage(){
                 </div>
                 <div>
                     <input 
-                    className="password"
+                    className="password m-5 p-1 text-black"
                     type="password"
                     placeholder="Password"
                     value={password}
@@ -79,9 +79,10 @@ export default function RegisterPage(){
                     />
                 </div>
                 <div>
-                    <button className="btn-submit" type="submit">Create User</button>
-                    <button onClick={goHome}>Go Home</button>
+                    <button className="btn-submit bg-sky-400 m-5" type="submit">Create User</button>
+                    
                 </div>
+                <button className="bg-sky-400 p-5 m-5"onClick={goHome}>Go Home</button>
             </form>
         </div>
     
