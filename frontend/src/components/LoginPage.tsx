@@ -6,6 +6,9 @@ export default function LoginPage() {
    const [password, setPassword] = useState('');
    const navigate = useNavigate();
 
+   const goHome = () =>{
+    navigate('/');
+}
 
     async function logIn(username: string, password: string){
 
@@ -49,8 +52,9 @@ export default function LoginPage() {
 
 
     return(
-        <div className="loginForm bg-indigo-400 rounded-xl p-5 m-5" >
-            <h2 className="font-bold justify-center m-5">Log in Here</h2>
+        <div className="h-screen bg-purple-400 flex items-center justify-center">
+        <div className="loginForm bg-indigo-400 rounded-xl p-5" >
+            <h2 className="font-bold justify-center text-white m-5 text-xl">Log in Here</h2>
             <form className="text-gray-700" onSubmit={handleSubmit}>
                 <div>
                     <input 
@@ -70,9 +74,11 @@ export default function LoginPage() {
                     />
                 </div>
                 <div>
-                    <button className="btn-submit m-5 bg-indigo-300" type="submit">Log in</button>
+                    <button className="btn-submit m-5 bg-indigo-300 text-white" type="submit">Log in</button>
                 </div>
             </form>
+            <button className="bg-indigo-500 p-5 m-5 text-white"onClick={goHome}>Go Home</button>
+        </div>
         </div>
     )
 }

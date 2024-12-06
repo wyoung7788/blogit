@@ -57,7 +57,7 @@ export default function RegisterPage(){
 
     return(
 
-        <div className="bg-blue-400 h-screen">
+        <div className="bg-blue-400 h-screen justify-center items-center flex">
         <div className="registerForm p-5 text-white" >
             <h2 className="font-extrabold text-3xl m-5 p-5">Register Here</h2>
             <form className="bg-blue-300 rounded-xl" onSubmit={handleSubmit}>
