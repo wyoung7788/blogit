@@ -19,4 +19,5 @@ function runServer(filePath, port) {
   
   // Run each server
   runServer('./auth/login_route.js', 5175); 
-  runServer('./posts/posts_route.js', 5176);    
+  runServer('./posts/posts_route.js', 5176);  
+  runServer('./comments/comments_route.js', 5177);  
