@@ -18,6 +18,7 @@ export const loadComments = async (req, res) => {
 export const createComment = async (req, res) => {
     try {
         const { post_id, author_id, content } = req.body;
+        console.log(post_id)
 
         if (!post_id || !author_id || !content) {
             return res.status(400).json({ success: false, message: 'Missing required fields' });

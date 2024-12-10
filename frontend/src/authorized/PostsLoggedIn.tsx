@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 export default function PostsLoggedIn() {
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState({}); // Comments are stored by post_id
-
+    const [newComment, setCommentContent] = useState('');
+    const handleTextChange = (e) => {
+        setCommentContent(e.target.value);  // Update state when user types in the textarea
+    };
     // Fetch posts
     useEffect(() => {
         const fetchPosts = async () => {
@@ -53,35 +56,39 @@ export default function PostsLoggedIn() {
     };
 
     // Handle comment submission
-    const handleCommentSubmit = async (postId, content) => {
-        try {
+    const handleCommentSubmit = async (postId, content: string) => {
+        const authorId = localStorage.getItem('userId');
+        
+        try{ 
+        const commentData = {
+            post_id: postId, 
+            author_id: authorId,
+            content: content
+        }
+
+        console.log(commentData)
+
             const response = await fetch('http://localhost:5177/api/comments/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ postId, content }),
+                body: JSON.stringify(commentData),
             });
 
             if (!response.ok) {
                 throw new Error('Failed to create comment');
             }
-
-            const data = await response.json();
-            setPosts((prevPosts) =>
-                prevPosts.map((post) =>
-                    post.post_id === postId
-                        ? { ...post, comments: [...(post.comments || []), data.data] }
-                        : post
-                )
-            );
+            const result = await response.json();
+            console.log('Comment created successfully:', result);
         } catch (error) {
             console.error('Error submitting comment:', error);
         }
     };
 
     return (
-        <div className="bg-blue-500 rounded-xl m-5 p-5 w-30">
+        <div className="flex items-center justify-center min-h-screen w-50">
+        <div className="bg-blue-500 rounded-xl m-5 p-5">
             <h1>Recent Posts</h1>
             {posts.length === 0 ? (
                 <p>No posts available.</p>
@@ -113,17 +120,19 @@ export default function PostsLoggedIn() {
                             )}
 
                             {/* Comment Submission */}
-                            <textarea
+                            <textarea className="text-slate-800"
                                 placeholder="Add a comment..."
-                                onChange={(e) => handleCommentSubmit(post.post_id, e.target.value)}
+                                value= {newComment}
+                                onChange={handleTextChange}
                             />
-                            <button onClick={(e) => handleCommentSubmit(post.post_id, e.target.value)}>
+                            <button className="bg-blue-400" onClick={() => handleCommentSubmit(post.post_id, newComment)}>
                                 Submit Comment
                             </button>
                         </li>
                     ))}
                 </ul>
             )}
+        </div>
         </div>
     );
 }

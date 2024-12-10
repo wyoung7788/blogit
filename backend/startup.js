@@ -10,11 +10,7 @@ function runServer(filePath, port) {
     serverProcess.stderr.on('data', (data) => {
       console.error(`Error on server at port ${port}: ${data}`);
     });
-  /*
-    serverProcess.on('close', (code) => {
-      console.log(`Server at port ${port} exited with code ${code}`);
-    });
-    */
+
   }
   
   // Run each server

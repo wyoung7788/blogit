@@ -10,8 +10,17 @@ export default function AuthorizedPage(){
         
         <div className="bg-blue-400 min-h-screen text-white">
             <MainHeader/>
-            <CreatePost/>
-            <PostsLoggedIn/>
-        </div>
+            <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-2">
+                <PostsLoggedIn/>
+                </div>
+                <div className="col-start-3">
+                <CreatePost/>
+                </div>
+            </div>
+            
+            
+            </div>
+          
     )
 }
